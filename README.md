@@ -1,9 +1,9 @@
-# USB armory Debian base image [![Build Status](https://github.com/f-secure-foundry/usbarmory-debian-base_image/workflows/Build-All/badge.svg)](https://github.com/f-secure-foundry/usbarmory-debian-base_image/actions)
+# GlobaLeaks image for USB Armory [![Build Status](https://github.com/f-secure-foundry/usbarmory-debian-base_image/workflows/Build-All/badge.svg)](https://github.com/f-secure-foundry/usbarmory-debian-base_image/actions)
 
-The Makefile in this repository allows generation of a basic Debian
+The Makefile in this repository allows generation of an image of GlobaLeaks for USB Armory
 installation for the [USB armory](https://github.com/f-secure-foundry/usbarmory).
 
-Pre-compiled releases are [available](https://github.com/f-secure-foundry/usbarmory-debian-base_image/releases).
+Pre-compiled releases are [available](https://github.com/globaleaks/globaleaks-usbarmory-image/releases).
 
 ## Pre-requisites
 
@@ -72,7 +72,7 @@ correct one. Errors in target specification will result in disk corruption.
 
 Linux (verify target from terminal using `dmesg`):
 ```
-sudo dd if=usbarmory-*-debian_buster-base_image-YYYYMMDD.raw of=/dev/sdX bs=1M conv=fsync
+sudo dd if=usbarmory-mark-two-globaleaks.raw of=/dev/sdX bs=1M conv=fsy
 ```
 
 Mac OS X (verify target from terminal with `diskutil list`):

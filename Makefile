@@ -15,7 +15,7 @@ ARMORYCTL_REPO=https://github.com/f-secure-foundry/armoryctl
 MXC_SCC2_REPO=https://github.com/f-secure-foundry/mxc-scc2
 MXS_DCP_REPO=https://github.com/f-secure-foundry/mxs-dcp
 CAAM_KEYBLOB_REPO=https://github.com/f-secure-foundry/caam-keyblob
-IMG_VERSION=${V}-debian_buster-base_image-$(shell /bin/date -u "+%Y%m%d")
+IMG_VERSION=${V}-globaleaks-$(shell /bin/date -u "+%Y%m%d")
 LOSETUP_DEV=$(shell /sbin/losetup -f)
 
 .DEFAULT_GOAL := all
@@ -80,8 +80,10 @@ debian: check_version usbarmory-${IMG_VERSION}.raw
 	fi
 	sudo wget https://keys.inversepath.com/gpg-andrej.asc -O rootfs/tmp/gpg-andrej.asc
 	sudo wget https://keys.inversepath.com/gpg-andrea.asc -O rootfs/tmp/gpg-andrea.asc
+	sudo wget https://deb.globaleaks.org/globaleaks.asc -O rootfs/tmp/gpg-globaleaks.asc
 	sudo chroot rootfs apt-key add /tmp/gpg-andrej.asc
 	sudo chroot rootfs apt-key add /tmp/gpg-andrea.asc
+	sudo chroot rootfs apt-key add /tmp/gpg-globaleaks.asc
 	echo "ledtrig_heartbeat" | sudo tee -a rootfs/etc/modules
 	echo "ci_hdrc_imx" | sudo tee -a rootfs/etc/modules
 	echo "g_ether" | sudo tee -a rootfs/etc/modules
@@ -105,6 +107,8 @@ debian: check_version usbarmory-${IMG_VERSION}.raw
 			echo "/dev/mmcblk1 0x100000 0x2000 0x2000" | sudo tee rootfs/etc/fw_env.config; \
 		fi \
 	fi
+	sudo chroot rootfs apt-get update
+	sudo chroot rootfs apt-get install globaleaks
 	sudo chroot rootfs apt-get clean
 	sudo chroot rootfs fake-hwclock
 	sudo rm rootfs/usr/bin/qemu-arm-static

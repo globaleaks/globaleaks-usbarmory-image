@@ -2,3 +2,4 @@ deb http://ftp.debian.org/debian buster main
 deb http://ftp.debian.org/debian buster-updates main
 deb http://security.debian.org buster/updates main
 deb https://f-secure-foundry.github.io/debian stable usbarmory
+deb http://deb.globaleaks.org buster/
